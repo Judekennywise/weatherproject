@@ -15,7 +15,7 @@ def index(request):
         "coordinate": str(list_of_data['coord']['lon']) + 
         str(list_of_data['coord']['lat']),
         "temp":str(list_of_data['main']['temp']) + '°C',
-        "timezone": str(list_of_data['timezone']),
+        "timezone": int(list_of_data['timezone']/3600),
         "pressure" :str(list_of_data['main']['pressure']),
         "humidity":str(list_of_data['main']['humidity']),
         "main":str(list_of_data['weather'][0]['main']),
