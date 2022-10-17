@@ -8,6 +8,28 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.3/cerulean/bootstrap.min.css"
     integrity="sha512-dQLT/B7byn2LjN/DN4zeBKpwGV6qbidV0XiMRWQOL7TGrV7FkZFldkGG+DGMU+CQnMTcRZlUI7GMWt1j6akNew=="
     crossorigin="anonymous" />
+    <script src=
+
+"https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">
+
+    </script>
+
+
+
+    <script src=
+
+"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">
+
+    </script>
+
+
+
+    <link href=
+"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css"
+
+        rel="stylesheet" type="text/css" />
+
+
   <title>Weather App </title>
 </head>
 
@@ -19,24 +41,52 @@
         </span> </a>
       <a href="https://openweathermap.org" class="navbar-tech">OpenWeather - Get Your API</a>
     </div>
+
   </div>
 
   <br /><br /> <br>
-  <div id="jumbotron" class="jumbotron" style="text-align: center; margin-top:-50px">
-    <h1 class="display-5">Weather Desktop App by Jukennywise </h1>
-    <h5>Using Openweather API and Django Framework</h5>
+  <div id="jumbotron" class="jumbotron" style="text-align: center; margin-top:50px">
+    <h1 class="display-5">Weather App by Jukennywise </h1>
+    <h5>Using Openweathermap API and Django Framework</h5>
 
     <img src="{% static 'images/weather.png' %}" class="image" style="width:100px; margin-bottom:-50px; ">
   </div>
-
+{% for city in name %}
+{% if city %}
+{{city}}
+{% endif %}
+{% endfor%}
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <form method="post" class="col-md"">
+    <form method="post" class="col-md">
       {% csrf_token %}
       <div class=" input-group">
 
-      <input type="text" class="form-control" name="city" placeholder="Choose Your City ...">
+      <input type="text" class="form-control" name="city" id="tags" placeholder="Choose Your City ...">
       <div class="input-group-btn">
         <button type="submit" class="btn btn-primary">Search</button>
+          <script>
+
+  $( function() {
+
+    var availableTags = [
+
+        {% for city in cities %}
+
+            "{{city}}",
+
+        {% endfor %}
+
+    ];
+
+    $( "#tags" ).autocomplete({
+
+      source: availableTags
+
+    });
+
+  } );
+
+  </script>
       </div>
       </div>
       <form>
@@ -44,16 +94,16 @@
   <br> <br>
   <div class="row">
     {% if country_code and coordinate and temp and pressure and humidity and timezone %}
-    <div class="col d-flex justify-content-center" ">
+    <div class="col d-flex justify-content-center" >
       <div class=" card text-white bg-light mb-6">
       <div class=" card-body">
         <h4><span class="badge badge-primary">Name of City :</span> {{name}}</h4>
         <h4><span class="badge badge-primary">Country Code :</span> {{country_code}}</h4>
-        <h4><span class="badge badge-primary">Coordinates [X,Y] :</span> {{coordinate}}</h4>
+        <h4><span class="badge badge-primary">Coordinates [ longitude, latitude ] :</span> {{coordinate}}</h4>
         <h4><span class="badge badge-primary">Temperature in Celsius :</span> {{temp}}</h4>
-        <h4><span class="badge badge-primary">Pressure :</span> {{pressure}} </h4>
-        <h4><span class="badge badge-primary">Timezone :</span> {{timezone}} </h4>
-        <h4><span class="badge badge-primary">Humidity : </span> {{humidity}}</h4>
+        <h4><span class="badge badge-primary">Pressure :</span> {{pressure}}hPa </h4>
+        <h4><span class="badge badge-primary">Timezone :</span> {{timezone}} hour(s) shift from UTC </h4>
+        <h4><span class="badge badge-primary">Humidity : </span> {{humidity}}%</h4>
         <h4><span class="badge badge-primary">Forecast : </span> {{main}} <img
             src="http://openweathermap.org/img/w/{{icon}}.png" alt="Image" style="width:70px"></h4>
         <h4><span class="badge badge-primary">Description : </span> {{description}}</h4>
