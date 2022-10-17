@@ -36,7 +36,7 @@
 <body>
   <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
     <div class="container">
-      <a href="../" class="navbar-brand">Weather App <span style="color: rgb(142, 160, 171);"> <strong> - Django
+      <a href="../" class="navbar-brand">Weather App <span style="color: rgb(12, 133, 239);"> <strong> - Django
             Framework</strong>
         </span> </a>
       <a href="https://openweathermap.org" class="navbar-tech">OpenWeather - Get Your API</a>
@@ -47,7 +47,9 @@
   <br /><br /> <br>
   <div id="jumbotron" class="jumbotron" style="text-align: center; margin-top:50px">
     <h1 class="display-5">Weather App by Jukennywise </h1>
+
     <h5>Using Openweathermap API and Django Framework</h5>
+
 
     <img src="{% static 'images/weather.png' %}" class="image" style="width:100px; margin-bottom:-50px; ">
   </div>
@@ -102,7 +104,10 @@
         <h4><span class="badge badge-primary">Coordinates [ longitude, latitude ] :</span> {{coordinate}}</h4>
         <h4><span class="badge badge-primary">Temperature in Celsius :</span> {{temp}}</h4>
         <h4><span class="badge badge-primary">Pressure :</span> {{pressure}}hPa </h4>
+
         <h4><span class="badge badge-primary">Timezone :</span> {{timezone}} hour(s) shift from UTC </h4>
+
+        
         <h4><span class="badge badge-primary">Humidity : </span> {{humidity}}%</h4>
         <h4><span class="badge badge-primary">Forecast : </span> {{main}} <img
             src="http://openweathermap.org/img/w/{{icon}}.png" alt="Image" style="width:70px"></h4>
