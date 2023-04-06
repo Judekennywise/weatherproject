@@ -31,10 +31,6 @@
         rel="stylesheet" type="text/css" />
 
 
-    
-
-
-
   <title>Weather App </title>
 </head>
 
@@ -47,16 +43,13 @@
       <a href="https://openweathermap.org" class="navbar-tech">OpenWeather - Get Your API</a>
     </div>
 
-
   </div>
 
   <br /><br /> <br>
   <div id="jumbotron" class="jumbotron" style="text-align: center; margin-top:50px">
     <h1 class="display-5">Weather App </h1>
 
-
-    <h5>Using Openweathermapmap API and Django Framework</h5>
-
+    <h5>Using Openweathermap API and Django Framework</h5>
 
 
     <img src="{% static 'images/weather.png' %}" class="image" style="width:100px; margin-bottom:-50px; ">
@@ -66,31 +59,19 @@
       {% csrf_token %}
       <div class=" input-group">
 
-      <input type="text" class="form-control" name="city" id="tags" id="tags" placeholder="Choose Your City ...">
+      <input type="text" class="form-control" name="city" id="tags" placeholder="Choose Your City ...">
       <div class="input-group-btn">
         <button id ="get-data" type="submit" class="btn btn-primary">Search</button>
 
-          
+      </div>
       </div>
       <form>
   </nav>
   <br> <br>
   <div class="row">
     <div class="col d-flex justify-content-center" >
-      <div class=" card text-white bg-light mb-6">
-      <div class=" card-body">
-        <h4 id="city_name"><span class="badge badge-primary" id="span_name" >Name of City :</span></h4>
-        <h4 id="country_code"><span class="badge badge-primary">Country Code :</span> </h4>
-        <h4 id ="coordinates"><span class="badge badge-primary">Coordinates [ longitude, latitude ] :</span></h4>
-        <h4 id="temperature"><span class="badge badge-primary">Temperature in Celsius :</span></h4>
-        <h4 id="pressure"><span class="badge badge-primary">Pressure :</span> hPa </h4>
-
-        <h4 id="timezone"><span class="badge badge-primary">Timezone :</span>  </h4>
-
-
-
-        
-        <h4 id="humidity"><span class="badge badge-primary">Humidity : </span> {{humidity}}%</h4>
+      <div id="response_list" class=" card text-white bg-light mb-6">
+      
         <!--<h4 id="forcast"><span class="badge badge-primary">Forecast : </span> {{main}} <img
             src="http://openweathermap.org/img/w/{{icon}}.png" alt="Image" style="width:70px"></h4>
         <h4 id="description"><span class="badge badge-primary">Description : </span> {{description}}</h4>-->
@@ -120,14 +101,16 @@ function getWeatherData(e) {
       }
       console.log(output)
 
-      document.getElementById("city_name").innerHTML = output.name;
-      document.getElementById("country_code").innerHTML = output.sys.country;
-                        document.getElementById("coordinates").innerHTML = (output.coord.lon , output.coord.lat);
-                        document.getElementById("temperature").innerHTML = output.main.temp;
-                        document.getElementById("pressure").innerHTML = output.main.pressure;
-                        document.getElementById("timezone").innerHTML = output.timezone /3600;
-                        document.getElementById("humidity").innerHTML = output.main.humidity;
-    
+      document.getElementById("response_list").innerHTML = `<h4 id="city_name"><span class="badge badge-primary" id="span_name" >Name of City :</span> ${output.name}</h4>
+        <h4 id="country_code"><span class="badge badge-primary">Country Code :</span> ${output.sys.country} </h4>
+        <h4 id ="coordinates"><span class="badge badge-primary">Coordinates [ longitude, latitude ] :</span> ${output.coord.lon }, ${ output.coord.lat}</h4>
+        <h4 id="temperature"><span class="badge badge-primary">Temperature in Celsius :</span> ${output.main.temp}</h4>
+        <h4 id="pressure"><span class="badge badge-primary">Pressure :</span> ${ output.main.pressure} hPa </h4>
+        <h4 id="timezone"><span class="badge badge-primary">Timezone :</span> ${output.timezone /3600} away from UTC</h4>
+
+
+        <h4 id="humidity"><span class="badge badge-primary">Humidity : </span> ${output.main.humidity}%</h4>
+`;
   };
 
   newXHRRequest.send();

@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django import forms
-from .models import Names
+
 # Create your views here.
 import urllib.request
 import json
@@ -15,7 +14,7 @@ def index(request):
         data = {
         "name": str(list_of_data['name']),
         "country_code": str(list_of_data['sys']['country']),
-        "coordinate": str(list_of_data['coord']['lon']) + "," +
+        "coordinate": str(list_of_data['coord']['lon']) + 
         str(list_of_data['coord']['lat']),
         "temp":str(list_of_data['main']['temp']) + '°C',
         "timezone": int(list_of_data['timezone']/3600),
@@ -24,11 +23,11 @@ def index(request):
         "main":str(list_of_data['weather'][0]['main']),
         "description" :str(list_of_data['weather'][0]['description']),
         "icon":list_of_data['weather'][0]['icon'],
-        "cities": str(list_of_data['name']),
         }
         print(list_of_data)
     else:
         data= {}"""
+
 
 
 
