@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-{% load static %}
+  {% load static %}
+
 
 <head>
   <meta charset="UTF-8" />
@@ -46,75 +47,103 @@
 
   <br /><br /> <br>
   <div id="jumbotron" class="jumbotron" style="text-align: center; margin-top:50px">
-    <h1 class="display-5">Weather App by Jukennywise </h1>
+    <h1 class="display-5">Weather App </h1>
 
     <h5>Using Openweathermap API and Django Framework</h5>
 
 
     <img src="{% static 'images/weather.png' %}" class="image" style="width:100px; margin-bottom:-50px; ">
-  </div>
-{% for city in name %}
-{% if city %}
-{{city}}
-{% endif %}
-{% endfor%}
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <form method="post" class="col-md">
+    <form method="post" class="col-md" id="search_form">
       {% csrf_token %}
       <div class=" input-group">
 
       <input type="text" class="form-control" name="city" id="tags" placeholder="Choose Your City ...">
       <div class="input-group-btn">
-        <button type="submit" class="btn btn-primary">Search</button>
-          <script>
+        <button id ="get-data" type="submit" class="btn btn-primary">Search</button>
 
-  $( function() {
-
-    var availableTags = [
-
-        {% for city in cities %}
-
-            "{{city}}",
-
-        {% endfor %}
-
-    ];
-
-    $( "#tags" ).autocomplete({
-
-      source: availableTags
-
-    });
-
-  } );
-
-  </script>
       </div>
       </div>
       <form>
   </nav>
   <br> <br>
   <div class="row">
-    {% if country_code and coordinate and temp and pressure and humidity and timezone %}
     <div class="col d-flex justify-content-center" >
-      <div class=" card text-white bg-light mb-6">
-      <div class=" card-body">
-        <h4><span class="badge badge-primary">Name of City :</span> {{name}}</h4>
-        <h4><span class="badge badge-primary">Country Code :</span> {{country_code}}</h4>
-        <h4><span class="badge badge-primary">Coordinates [ longitude, latitude ] :</span> {{coordinate}}</h4>
-        <h4><span class="badge badge-primary">Temperature in Celsius :</span> {{temp}}</h4>
-        <h4><span class="badge badge-primary">Pressure :</span> {{pressure}}hPa </h4>
-
-        <h4><span class="badge badge-primary">Timezone :</span> {{timezone}} hour(s) shift from UTC </h4>
-
-        
-        <h4><span class="badge badge-primary">Humidity : </span> {{humidity}}%</h4>
-        <h4><span class="badge badge-primary">Forecast : </span> {{main}} <img
+      <div id="response_list" class=" card text-white bg-light mb-6">
+      
+        <!--<h4 id="forcast"><span class="badge badge-primary">Forecast : </span> {{main}} <img
             src="http://openweathermap.org/img/w/{{icon}}.png" alt="Image" style="width:70px"></h4>
-        <h4><span class="badge badge-primary">Description : </span> {{description}}</h4>
+        <h4 id="description"><span class="badge badge-primary">Description : </span> {{description}}</h4>-->
       </div>
-      {% endif %}
     </div>
+    <script>
+    button = document.getElementById("get-data");
+    button.addEventListener("click", getWeatherData);
+
+function getWeatherData(e) {
+  const newXHRRequest = new XMLHttpRequest();
+  const name_input = document.getElementById("tags").value;
+
+  newXHRRequest.open(
+    "GET",
+    'https://api.openweathermap.org/data/2.5/weather?q='+ name_input + '&units=metric&APPID=3eb3e2e6a06817b3e14b2862ef367bac',
+    true
+  );
+
+  newXHRRequest.onload = function () {
+    if (this.status === 200) {
+      const weather_data = JSON.parse(this.responseText);
+      var output = weather_data;
+    }
+    else {
+        output = "No data";
+      }
+      console.log(output)
+
+      document.getElementById("response_list").innerHTML = `<h4 id="city_name"><span class="badge badge-primary" id="span_name" >Name of City :</span> ${output.name}</h4>
+        <h4 id="country_code"><span class="badge badge-primary">Country Code :</span> ${output.sys.country} </h4>
+        <h4 id ="coordinates"><span class="badge badge-primary">Coordinates [ longitude, latitude ] :</span> ${output.coord.lon }, ${ output.coord.lat}</h4>
+        <h4 id="temperature"><span class="badge badge-primary">Temperature in Celsius :</span> ${output.main.temp}</h4>
+        <h4 id="pressure"><span class="badge badge-primary">Pressure :</span> ${ output.main.pressure} hPa </h4>
+        <h4 id="timezone"><span class="badge badge-primary">Timezone :</span> ${output.timezone /3600} away from UTC</h4>
+
+
+        <h4 id="humidity"><span class="badge badge-primary">Humidity : </span> ${output.main.humidity}%</h4>
+`;
+  };
+
+  newXHRRequest.send();
+
+  e.preventDefault();
+
+  
+}
+        /*const name = document.getElementById("tags")
+         document.getElementById("search_form").addEventListener("submit", async event => {
+                event.preventDefault();
+
+                const name_input = (document.getElementById("tags")).value;
+                    fetch('https://api.openweathermap.org/data/2.5/weather?q='+ name_input + '&units=metric&APPID=3eb3e2e6a06817b3e14b2862ef367bac')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("city_name").innerHTML = data.name;
+                        document.getElementById("country_code").innerHTML = data.sys.country;
+                        document.getElementById("coordinates").innerHTML = (data.coord.lon , data.coord.lat);
+                        document.getElementById("temperature").innerHTML = data.main.temp;
+                        document.getElementById("pressure").innerHTML = data.main.pressure;
+                        document.getElementById("timezone").innerHTML = data.timezone /3600;
+                        document.getElementById("humidity").innerHTML = data.main.humidity;
+                        
+                        
+                    })
+                    .catch(error => console.error(error));
+                })*/
+
+                
+
+  </script>
+  
 </body>
 
 </html>
