@@ -31,6 +31,10 @@
         rel="stylesheet" type="text/css" />
 
 
+    
+
+
+
   <title>Weather App </title>
 </head>
 
@@ -43,13 +47,16 @@
       <a href="https://openweathermap.org" class="navbar-tech">OpenWeather - Get Your API</a>
     </div>
 
+
   </div>
 
   <br /><br /> <br>
   <div id="jumbotron" class="jumbotron" style="text-align: center; margin-top:50px">
-    <h1 class="display-5">Weather App by Jukennywise </h1>
+    <h1 class="display-5">Weather App </h1>
 
-    <h5>Using Openweathermap API and Django Framework</h5>
+
+    <h5>Using Openweathermapmap API and Django Framework</h5>
+
 
 
     <img src="{% static 'images/weather.png' %}" class="image" style="width:100px; margin-bottom:-50px; ">
@@ -59,11 +66,11 @@
       {% csrf_token %}
       <div class=" input-group">
 
-      <input type="text" class="form-control" name="city" id="tags" placeholder="Choose Your City ...">
+      <input type="text" class="form-control" name="city" id="tags" id="tags" placeholder="Choose Your City ...">
       <div class="input-group-btn">
         <button id ="get-data" type="submit" class="btn btn-primary">Search</button>
 
-      </div>
+          
       </div>
       <form>
   </nav>
@@ -77,9 +84,12 @@
         <h4 id ="coordinates"><span class="badge badge-primary">Coordinates [ longitude, latitude ] :</span></h4>
         <h4 id="temperature"><span class="badge badge-primary">Temperature in Celsius :</span></h4>
         <h4 id="pressure"><span class="badge badge-primary">Pressure :</span> hPa </h4>
-        <h4 id="timezone"><span class="badge badge-primary">Timezone :</span> </h4>
+
+        <h4 id="timezone"><span class="badge badge-primary">Timezone :</span>  </h4>
 
 
+
+        
         <h4 id="humidity"><span class="badge badge-primary">Humidity : </span> {{humidity}}%</h4>
         <!--<h4 id="forcast"><span class="badge badge-primary">Forecast : </span> {{main}} <img
             src="http://openweathermap.org/img/w/{{icon}}.png" alt="Image" style="width:70px"></h4>

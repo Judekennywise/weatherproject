@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-*$td#46torkp*hu)kuafg5x43@k(!j8b1vn33pjh5d+2py@hm$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['judekennywise.pythonanywhere.com']
 
 
 # Application definition
@@ -124,7 +124,7 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/images/'
-
+STATIC_ROOT = '/home/judekennywise/weather/weatherapp/static/'
 STATICFILES_DIRS =(
     os.path.join(BASE_DIR, 'static'),
 )
