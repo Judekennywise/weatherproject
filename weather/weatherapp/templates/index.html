@@ -106,10 +106,13 @@ function getWeatherData(e) {
         <h4 id ="coordinates"><span class="badge badge-primary">Coordinates [ longitude, latitude ] :</span> ${output.coord.lon }, ${ output.coord.lat}</h4>
         <h4 id="temperature"><span class="badge badge-primary">Temperature in Celsius :</span> ${output.main.temp}</h4>
         <h4 id="pressure"><span class="badge badge-primary">Pressure :</span> ${ output.main.pressure} hPa </h4>
-        <h4 id="timezone"><span class="badge badge-primary">Timezone :</span> ${output.timezone /3600} away from UTC</h4>
+        <h4 id="timezone"><span class="badge badge-primary">Timezone :</span> ${output.timezone /3600}hr(s) away from UTC</h4>
 
 
         <h4 id="humidity"><span class="badge badge-primary">Humidity : </span> ${output.main.humidity}%</h4>
+        <h4 id="forcast"><span class="badge badge-primary">Forecast : </span>  <img
+            src="http://openweathermap.org/img/w/${output['weather']['0']['icon']}.png" alt="Image" style="width:70px"></h4>
+        <h4 id="description"><span class="badge badge-primary">Description : </span> ${output['weather']['0']['description']} </h4>
 `;
   };
 
