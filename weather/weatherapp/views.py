@@ -5,9 +5,11 @@ import urllib.request
 import json
 
 def index(request):
-    if request.method== 'POST':
+   return(render(request, 'index.html'))
+
+   """ if request.method== 'POST':
         city = request.POST['city']
-        source = urllib.request.urlopen('http://api.openweathermap.org/data/2.5/weather?q='+city + '&units=metric&APPID=3eb3e2e6a06817b3e14b2862ef367bac').read()
+        source = urllib.request.urlopen('http://api.openweathermap.org/data/2.5/weather?q='+ city + '&units=metric&APPID=3eb3e2e6a06817b3e14b2862ef367bac').read()
         list_of_data = json.loads(source)
         data = {
         "name": str(list_of_data['name']),
@@ -22,8 +24,7 @@ def index(request):
         "description" :str(list_of_data['weather'][0]['description']),
         "icon":list_of_data['weather'][0]['icon'],
         }
-        print(data)
+        print(list_of_data)
     else:
-        data= {}
+        data= {}"""
 
-    return(render(request, 'index.html', data))
