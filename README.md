@@ -12,13 +12,13 @@ Open your terminal
 
 Clone the project 
 ```
-https://github.com/Judekennywise/Url_Shortener_APP.git
+git clone https://github.com/Judekennywise/weatherproject.git
 ```
 
 Enter the project directory 
 
 ```
-cd Url_Shortener_APP
+cd weatherproject
 ```
 
 Create a virtual env
