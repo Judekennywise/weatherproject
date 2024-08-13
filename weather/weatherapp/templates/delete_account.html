@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  {% load static %}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.5.3/cerulean/bootstrap.min.css"
+    crossorigin="anonymous" />
+  <title>Delete Account</title>
+</head>
+
+<body>
+  <div class="container" style="margin-top: 50px;">
+    <h2>Are you sure you want to delete your account?</h2>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Delete Account</button>
+    </form>
+  </div>
+</body>
+</html>
